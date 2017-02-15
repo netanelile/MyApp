@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.netan.myapp.MainActivity">
+
+    <TextView
+        android:layout_width="200dp"
+        android:text="Hello World!"
+        android:id="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="40dp"
+        style="@style/CodeFontRed" /> <!--I've created this style-->
+
+    <Button
+        android:text="Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button4"
+        android:layout_alignStart="@+id/button4"
+        android:layout_marginTop="20dp"
+        android:layout_x="24dp"
+        android:layout_y="59dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/button"
+        android:layout_marginTop="23dp"
+        android:id="@+id/editText"
+        android:layout_x="25dp"
+        android:layout_y="255dp"
+        android:text="Chenge the text on next activity"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/button3" />
+
+    <Button
+        android:text="My Dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        android:layout_marginTop="17dp"
+        android:layout_x="193dp"
+        android:layout_y="77dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Long Tap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_x="25dp"
+        android:layout_y="146dp"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignStart="@+id/button3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        android:background="@android:drawable/ic_menu_send"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Proccess dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:layout_x="174dp"
+        android:layout_y="169dp"
+        android:layout_alignBaseline="@+id/button4"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_toStartOf="@+id/button6" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/button5"
+        android:background="@drawable/play_button"
+        android:layout_x="0dp"
+        android:layout_y="314dp"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_marginTop="33dp" />
+
+    <ImageView
+        android:layout_width="215dp"
+        android:layout_height="171dp"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:id="@+id/imageView2"
+        android:layout_x="0dp"
+        android:layout_y="314dp"
+        android:layout_marginBottom="29dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/button" />
+
+
+</RelativeLayout>
