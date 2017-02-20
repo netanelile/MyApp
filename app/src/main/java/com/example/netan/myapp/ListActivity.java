@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
+
 public class ListActivity extends android.app.ListActivity {
 
     @Override
@@ -32,23 +36,36 @@ public class ListActivity extends android.app.ListActivity {
 
         @NonNull
         @Override
-        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        public View getView(int position, final View convertView, @NonNull ViewGroup parent) {
 
             LayoutInflater infleater = (LayoutInflater) getSystemService((Context.LAYOUT_INFLATER_SERVICE));
-            View row = infleater.inflate(R.layout.list_item, parent, false);
+            final View row = infleater.inflate(R.layout.list_item, parent, false);
             String[] items = getResources().getStringArray(R.array.countries);
             ImageView iv = (ImageView) row.findViewById(R.id.imageView);
-            TextView tv = (TextView) row.findViewById(R.id.textView);
+            final TextView tv = (TextView) row.findViewById(R.id.textView);
             tv.setText(items[position]);
-
+            //Mecia files
+            final MediaPlayer mp_usa = MediaPlayer.create(ListActivity.this, R.raw.usa);
+            final MediaPlayer mp_brazil = MediaPlayer.create(ListActivity.this, R.raw.brazil);
+            final MediaPlayer mp_paris = MediaPlayer.create(ListActivity.this, R.raw.paris);
+            final MediaPlayer mp_japan = MediaPlayer.create(ListActivity.this, R.raw.japan);
+            final MediaPlayer mp_russia = MediaPlayer.create(ListActivity.this, R.raw.russia);
+            
             switch (items[position]) {
                 case "United States":
                     iv.setImageResource(R.drawable.usa);
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            MediaPlayer mp_usa = MediaPlayer.create(ListActivity.this, R.raw.usa);
-                            mp_usa.start();
+
+                            if(mp_usa.isPlaying()) {
+                                mp_usa.pause();
+                                int length = mp_usa.getCurrentPosition();
+                                mp_usa.seekTo(length);
+                            } else {
+                                mp_usa.start();
+
+                            }
                         }
                     });
                     break;
@@ -57,8 +74,13 @@ public class ListActivity extends android.app.ListActivity {
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            MediaPlayer mp_usa = MediaPlayer.create(ListActivity.this, R.raw.brazil);
-                            mp_usa.start();
+                            if (mp_brazil.isPlaying()) {
+                                mp_brazil.pause();
+                                int length = mp_brazil.getCurrentPosition();
+                                mp_brazil.seekTo(length);
+                            } else {
+                                mp_brazil.start();
+                            }
                         }
                     });
                     break;
@@ -67,8 +89,14 @@ public class ListActivity extends android.app.ListActivity {
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            MediaPlayer mp_usa = MediaPlayer.create(ListActivity.this, R.raw.paris);
-                            mp_usa.start();
+
+                            if (mp_paris.isPlaying()) {
+                                mp_paris.pause();
+                                int length = mp_paris.getCurrentPosition();
+                                mp_paris.seekTo(length);
+                            } else {
+                                mp_paris.start();
+                            }
                         }
                     });
                     break;
@@ -77,8 +105,14 @@ public class ListActivity extends android.app.ListActivity {
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            MediaPlayer mp_usa = MediaPlayer.create(ListActivity.this, R.raw.japan);
-                            mp_usa.start();
+
+                            if (mp_japan.isPlaying()) {
+                                mp_japan.pause();
+                                int length = mp_japan.getCurrentPosition();
+                                mp_japan.seekTo(length);
+                            } else {
+                                mp_japan.start();
+                            }
                         }
                     });
                     break;
@@ -87,8 +121,14 @@ public class ListActivity extends android.app.ListActivity {
                     row.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            MediaPlayer mp_usa = MediaPlayer.create(ListActivity.this, R.raw.russia);
-                            mp_usa.start();
+
+                            if (mp_russia.isPlaying()) {
+                                mp_russia.pause();
+                                int length = mp_russia.getCurrentPosition();
+                                mp_russia.seekTo(length);
+                            } else {
+                                mp_russia.start();
+                            }
                         }
                     });
                     break;
