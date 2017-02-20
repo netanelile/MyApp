@@ -1,4 +1,5 @@
 package com.example.netan.myapp;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,17 +9,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Icon;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.net.ConnectivityManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +32,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.net.URI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // CHeck i if the wifi is on and put it in the text vew
+        // Check i if the wifi is on and put it in the text vew
         ConnectivityManager conman = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         TextView tv = (TextView) findViewById(R.id.textView);
         NetworkInfo wifi = conman.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // Progress Dialog
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.setMessage("תפני ימינה, ואז שמאלה, ושם את תמותי!");
+        pd.setMessage("Now i'm protending to think... Click back to stop it.");
         pd.setIndeterminate(true);
         pd.setCancelable(true);
 
@@ -85,36 +92,39 @@ public class MainActivity extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage("Are You sure Stupid?!");
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Are You sure you want to quit?");
                 builder.setCancelable(false);
                 builder.setPositiveButton("Yes,", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
 
-
-                        // NOtification
+                        // Notification
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
                         PendingIntent pending = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-
+                        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher); //Large icon
                         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         Notification notify = new Notification.Builder(MainActivity.this)
                                 .setSmallIcon(R.drawable.stat_napp_icon)
+                                //set large notification
+                                .setLargeIcon(bm)
+                                //Set notification text
                                 .setTicker("Knock, Knock, Knock")
-                                .setContentTitle("I am the angel of Death")
-                                .setContentText("Preapare to Die!")
-                                .setWhen(System.currentTimeMillis())
+                                .setContentTitle("You Have Closed the app")
+                                .setContentText("And now you got a notification!")
                                 .setContentIntent(pending)
+                                .setWhen(System.currentTimeMillis())
+                                .setAutoCancel(true)
                                 .build();
+                        notify.sound = Uri.parse("android.resource://com.example.netan.myapp/" + R.raw.beep);
                         nm.notify(0, notify);
-                        MediaPlayer mp_beep = MediaPlayer.create(MainActivity.this, R.raw.beep);
-                        mp_beep.start();
+
 
                         // Exit the app
                         MainActivity.this.finish();
                     }
                 });
-                builder.setNegativeButton("Hell No!", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("No!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.cancel();
@@ -146,11 +156,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Dialog d = new Dialog(MainActivity.this);
                 d.setContentView(R.layout.dialog);
-                d.setTitle("This Is MY Dialog");
+                d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT)); // Makes the dialog transparent
                 d.show();
-
-                Toast toast = Toast.makeText(MainActivity.this, "טוסטר משולשים!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                Toast toast = Toast.makeText(MainActivity.this, "This is My Dialog", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
         });
@@ -163,25 +172,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // image view that display image that was capture from the camera
-        iv2 = (ImageView) findViewById(R.id.imageView2); //using the global variable to ithe image view form the XML
 
+        iv2 = (ImageView) findViewById(R.id.imageView2); //using the global variable to ithe image view form the XML
         iv2.setOnClickListener(new View.OnClickListener() { // Creating on CLick listener for the image view
+
+            //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, CAMERA_REQUEST);
             }
         });
 
     }
-
-
+    static final int CAMERA_REQUEST = 1888;
     //Connecting the image view to the image that was caputred on cam
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bm = (Bitmap) data.getExtras().get("data");
-        iv2.setImageBitmap(bm);
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap bm = (Bitmap) data.getExtras().get("data");
+            iv2.setImageBitmap(bm);
+        }
+       // }
+        //super.onActivityResult(requestCode, resultCode, data);
+
+
     }
 
     //Main Menu
