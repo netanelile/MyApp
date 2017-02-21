@@ -39,7 +39,7 @@ import java.net.URI;
 public class MainActivity extends AppCompatActivity {
 
 
-    // Cotext menu that gonna contain the menu with the radio button
+    // Context menu that gonna contain the menu with the radio button
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -48,6 +48,18 @@ public class MainActivity extends AppCompatActivity {
         menu.setHeaderTitle("Context Menu");
 
     }
+    //Context Menue - Taping on each item, leads to new activity
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item1) {
+            startActivity(new Intent(MainActivity.this, ThirdActiviry.class));
+        }
+        if (item.getItemId() == R.id.item2) {
+            startActivity(new Intent(MainActivity.this, ForthActivity.class));
+        }
+        return super.onContextItemSelected(item);
+    }
+
     ImageView iv2;
 
     @Override
@@ -71,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         // Progress Dialog
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.setMessage("Now i'm protending to think... Click back to stop it.");
+        pd.setMessage("Now i'm protending to think... Tap back to stop it.");
         pd.setIndeterminate(true);
         pd.setCancelable(true);
 

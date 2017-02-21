@@ -42,7 +42,7 @@
         android:id="@+id/editText"
         android:layout_x="25dp"
         android:layout_y="255dp"
-        android:text="Chenge the text on next activity"
+        android:hint= "Chenge the text on next activity"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/button3" />
 

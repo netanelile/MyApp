@@ -25,6 +25,9 @@ public class SecondActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         TextView tv = (TextView) findViewById(R.id.textView3);
         tv.setText(getIntent().getExtras().getString("thetext"));
+        if (tv.getText().equals("")){
+            tv.setText("You didn't put any Text");
+        }
 
         /** Initializing YouTube Player VIew **/
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);

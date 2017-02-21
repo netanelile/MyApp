@@ -9,10 +9,14 @@
     </style>
 
     <style name="CodeFontRed" parent="@android:style/TextAppearance">
-        <item name = "android:typeface">monospace</item>
+        <item name="android:typeface">monospace</item>
         <item name="android:textColor">#FF0000</item>
         <item name="android:textSize">25sp</item>
 
     </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
