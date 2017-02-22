@@ -41,4 +41,15 @@
         android:id="@+id/textView4"
         tools:text="This is video from YouTube"
         android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:hint= "Type text to save"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/youtube_player"
+        android:layout_marginTop="10dp"
+        android:id="@+id/editText2" />
 </RelativeLayout>

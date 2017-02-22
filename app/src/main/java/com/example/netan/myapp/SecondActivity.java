@@ -1,5 +1,7 @@
 package com.example.netan.myapp;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -17,13 +19,18 @@ public class SecondActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     public static final String API_KEY = "AIzaSyBBJscHGbOXaaRwGAenXjkCGshUugHmPLk";
     public static final String VIDEO_ID = "kXNXH2oZRRs";
+    private EditText et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        et = (EditText) findViewById(R.id.editText2);
         TextView tv = (TextView) findViewById(R.id.textView3);
+        SharedPreferences settings = getSharedPreferences("MYPREFS", 0);
+        et.setText(settings.getString("tvalue", ""));
+
         tv.setText(getIntent().getExtras().getString("thetext"));
         if (tv.getText().equals("")){
             tv.setText("You didn't put any Text");
@@ -32,6 +39,15 @@ public class SecondActivity extends YouTubeBaseActivity implements YouTubePlayer
         /** Initializing YouTube Player VIew **/
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
         youTubePlayerView.initialize(API_KEY, this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences settings = getSharedPreferences("MYPREFS", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("tvalue", et.getText().toString());
+        editor.commit();
     }
 
     @Override
