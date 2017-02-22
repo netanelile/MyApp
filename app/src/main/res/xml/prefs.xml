@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferencesScreen
+<PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckboxPreference
+    <CheckBoxPreference
         android:key = "first"
         android:title = "First Option"
-        android:summary = "This is the first titile"/>
+        android:summary = "This is the first tittle"/>
 
-    <CheckboxPreference
+    <CheckBoxPreference
         android:key = "second"
         android:title = "Second Option"
-        android:summary = "This is the second titile"/>
+        android:summary = "This is the second tittle"/>
 
-</PreferencesScreen>
+</PreferenceScreen>

@@ -29,8 +29,8 @@
         <activity android:name=".SecondActivity" />
         <activity android:name=".ThirdActiviry" />
         <activity android:name=".ForthActivity"/>
-        <activity android:name=".Preferences">
-        </activity>
+        <activity android:name=".Preferences"/>
+
     </application>
 
 </manifest>
