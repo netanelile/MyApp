@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.item2) {
             startActivity(new Intent(MainActivity.this, ForthActivity.class));
         }
+        if (item.getItemId() == R.id.item3) {
+            Intent intent = new Intent(MainActivity.this, Preferences.class);
+            startActivity(intent);
+        }
         return super.onContextItemSelected(item);
     }
 

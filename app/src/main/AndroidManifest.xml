@@ -28,7 +28,9 @@
         <activity android:name=".VideoActivity" />
         <activity android:name=".SecondActivity" />
         <activity android:name=".ThirdActiviry" />
-        <activity android:name=".ForthActivity"></activity>
+        <activity android:name=".ForthActivity"/>
+        <activity android:name=".Preferences">
+        </activity>
     </application>
 
 </manifest>
