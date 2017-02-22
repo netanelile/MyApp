@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -16,6 +17,7 @@ import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
         inflat.inflate(R.menu.context_menu, menu);
         menu.setHeaderTitle("Context Menu");
 
+        //Use the preference menu
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean first = settings.getBoolean("first", false); //key and default value
+        boolean second = settings.getBoolean("second", false); //key and default value
+
+        if (first){
+            Toast toast = Toast.makeText(MainActivity.this, "First options was checked and saved", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+        }
+        if (second){
+            Toast toast = Toast.makeText(MainActivity.this, "Second options was checked and saved", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+        }
+
     }
     //Context Menue - Taping on each item, leads to new activity
     @Override
@@ -57,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.item2) {
             startActivity(new Intent(MainActivity.this, ForthActivity.class));
         }
-        if (item.getItemId() == R.id.item3) {
+        if (item.getItemId() == R.id.item3) { //send the user to the preference menu
             Intent intent = new Intent(MainActivity.this, Preferences.class);
             startActivity(intent);
         }
