@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ThirdActiviry.class));
         }
         if (item.getItemId() == R.id.item2) {
-            startActivity(new Intent(MainActivity.this, ForthActivity.class));
+            startActivity(new Intent(MainActivity.this, MapsActivity.class));
         }
         if (item.getItemId() == R.id.item3) { //send the user to the preference menu
             Intent intent = new Intent(MainActivity.this, Preferences.class);
